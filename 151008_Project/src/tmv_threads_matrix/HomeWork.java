@@ -48,6 +48,7 @@ public class HomeWork {
 		System.out.println("generating matrix WITH THREADS is " + index1/index2 + " times faster");
 		
 		System.out.println("ending program");
+		System.out.println("committing release");
 	}
 
 	
