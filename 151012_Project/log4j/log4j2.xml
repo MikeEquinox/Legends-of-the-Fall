@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Properties>
+		<Property name="myfilename">test</Property>
+		<Property name="logpath">log</Property>
+	</Properties>
+
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+
+		<File name="File" fileName="${myfilename}">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</File>
+
+		<RollingFile name="RollingFile" fileName="${logpath}/${myfilename}.log"
+			filePattern="${logpath}/${myfilename}-%d{yyyy-MM-dd--hh-mm}.log">
+
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<!--  -->TimeBasedTriggeringPolicy interval="1" modulate="true" /-->	
+				<SizeBasedTriggeringPolicy size="100 kB" />
+			</Policies>
+
+		</RollingFile>
+
+
+	</Appenders>
+
+	<Loggers>
+		<Root level="error" additivity="false">
+			<AppenderRef ref="Console" />
+		</Root>
+
+		<Logger name="logger" level="info" additivity="false">
+			<appender-ref ref="Console" level="warn" />
+			<appender-ref ref="File" level="info" />
+		</Logger>
+
+		<Logger name="eqFile" level="info" additivity="false">
+			<AppenderRef ref="RollingFile" />
+		</Logger>
+
+		<Logger name="eqConsole" level="info" additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+		
+		<Logger name="eqConsoleFile" level="info" additivity="false">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="Console" />
+		</Logger>
+	</Loggers>
+
+</Configuration>
+
+
+
+
+ 
